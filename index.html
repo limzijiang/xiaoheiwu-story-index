@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>小黑屋故事索引</title>
+<style>
+:root{
+  --bg:#0f0e12; --panel:#18161d; --card:#1e1b24; --line:#2d2935; --text:#e9e4ee; --muted:#9a93a6;
+  --accent:#c9a24a; --accent-2:#8b2e3c; --chip:#26222d; --chip-on:#c9a24a; --chip-on-text:#1a1410;
+  --fav:#e8c35a;
+}
+:root[data-theme="light"]{
+  --bg:#f5f2ee; --panel:#fffdfa; --card:#ffffff; --line:#e3ddd4; --text:#221d26; --muted:#6e6676;
+  --accent:#9a6f12; --accent-2:#8b2e3c; --chip:#efe9e1; --chip-on:#8b2e3c; --chip-on-text:#fff; --fav:#b8860b;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg:#f5f2ee; --panel:#fffdfa; --card:#ffffff; --line:#e3ddd4; --text:#221d26; --muted:#6e6676;
+    --accent:#9a6f12; --accent-2:#8b2e3c; --chip:#efe9e1; --chip-on:#8b2e3c; --chip-on-text:#fff; --fav:#b8860b;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 -apple-system,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif}
+a{color:inherit}
+header{padding:20px 16px 8px;max-width:1400px;margin:auto;display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap}
+header h1{margin:0;font-size:24px;letter-spacing:.04em}
+header .sub{color:var(--muted);font-size:13px}
+header .sp{flex:1}
+.btn{background:var(--chip);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:6px 10px;cursor:pointer;font:inherit;font-size:13px}
+.btn:hover{border-color:var(--accent)}
+.wrap{max-width:1400px;margin:auto;padding:0 16px 40px;display:grid;grid-template-columns:300px 1fr;gap:20px}
+aside{position:sticky;top:12px;align-self:start;max-height:calc(100vh - 24px);overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
+aside h3{font-size:12px;letter-spacing:.12em;color:var(--muted);margin:16px 0 8px;text-transform:uppercase;display:flex;justify-content:space-between}
+aside h3:first-child{margin-top:0}
+aside h3 button{background:none;border:0;color:var(--accent);cursor:pointer;font-size:12px}
+input[type=search],select{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:8px 10px;font:inherit}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{background:var(--chip);border:1px solid transparent;border-radius:999px;padding:3px 10px;font-size:13px;cursor:pointer;user-select:none;white-space:nowrap}
+.chip .n{color:var(--muted);font-size:11px;margin-left:4px}
+.chip.on{background:var(--chip-on);color:var(--chip-on-text)}
+.chip.on .n{color:inherit;opacity:.7}
+.chip.favauthor{border-color:var(--fav)}
+.authors{max-height:260px;overflow:auto}
+.hero{grid-column:1/-1;background:linear-gradient(120deg,var(--accent-2),#3a1820 70%);color:#fff;border-radius:14px;padding:16px 18px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.hero b{font-size:18px}
+.hero .sp{flex:1}
+.hero .btn{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.3)}
+.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px;color:var(--muted);font-size:13px}
+.toolbar select{width:auto}
+.toolbar label{display:flex;gap:6px;align-items:center;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.card.fav{border-color:var(--fav);box-shadow:0 0 0 1px var(--fav) inset}
+.card.watched{opacity:.55}
+.thumb{position:relative;aspect-ratio:16/9;background:#000;display:block}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb .dur{position:absolute;right:6px;bottom:6px;background:rgba(0,0,0,.75);color:#fff;font-size:12px;padding:1px 6px;border-radius:4px}
+.thumb .ser{position:absolute;left:6px;top:6px;background:var(--accent-2);color:#fff;font-size:11px;padding:1px 7px;border-radius:4px}
+.body{padding:10px 12px 12px;display:flex;flex-direction:column;gap:6px;flex:1}
+.title{font-weight:600;font-size:14px;line-height:1.4;text-decoration:none}
+.title:hover{color:var(--accent)}
+.sum{color:var(--muted);font-size:13px}
+.meta{font-size:12px;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap}
+.au{color:var(--accent);cursor:pointer;font-weight:600}
+.au.isfav::before{content:"★ ";color:var(--fav)}
+.tags{display:flex;gap:4px;flex-wrap:wrap}
+.tag{font-size:11px;background:var(--chip);padding:1px 7px;border-radius:4px;cursor:pointer}
+.tag.src{background:transparent;border:1px solid var(--line)}
+.foot{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:4px;font-size:12px;color:var(--muted)}
+.foot label{display:flex;gap:4px;align-items:center;cursor:pointer}
+.empty{color:var(--muted);padding:40px;text-align:center}
+.mobile-toggle{display:none}
+@media (max-width:820px){
+  .wrap{grid-template-columns:1fr}
+  aside{position:static;max-height:none;display:none}
+  aside.open{display:block}
+  .mobile-toggle{display:inline-block}
+}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>小黑屋故事索引</h1>
+    <div class="sub">B站 UP主「小黑屋的貘」全部影片 · 依原作者、來源論壇、風格篩選 · <span id="updated"></span></div>
+  </div>
+  <div class="sp"></div>
+  <button class="btn mobile-toggle" id="toggleSide">篩選</button>
+  <button class="btn" id="theme">切換深淺色</button>
+</header>
+<div class="wrap">
+  <div class="hero" id="hero"></div>
+  <aside id="side">
+    <h3>搜尋</h3>
+    <input type="search" id="q" placeholder="標題、提要、作者…">
+    <h3>原作者 <button data-clear="author">清除</button></h3>
+    <input type="search" id="aq" placeholder="找作者…" style="margin-bottom:8px">
+    <div class="chips authors" id="f-author"></div>
+    <h3>來源 <button data-clear="source">清除</button></h3>
+    <div class="chips" id="f-source"></div>
+    <h3>地區 <button data-clear="region">清除</button></h3>
+    <div class="chips" id="f-region"></div>
+    <h3>風格（可複選，需全部符合）<button data-clear="styles">清除</button></h3>
+    <div class="chips" id="f-styles"></div>
+    <h3>細部來源 <button data-clear="detail">清除</button></h3>
+    <div class="chips" id="f-detail"></div>
+  </aside>
+  <main>
+    <div class="toolbar">
+      <span id="count"></span>
+      <select id="sort">
+        <option value="new">最新發佈</option>
+        <option value="old">最早發佈</option>
+        <option value="view">播放最多</option>
+        <option value="fav">收藏最多</option>
+        <option value="long">最長</option>
+        <option value="short">最短</option>
+      </select>
+      <label><input type="checkbox" id="hideWatched"> 隱藏已看</label>
+      <label><input type="checkbox" id="onlyFav"> 只看★作者</label>
+      <button class="btn" id="reset">全部重設</button>
+    </div>
+    <div class="grid" id="grid"></div>
+  </main>
+</div>
+<script src="data.js"></script>
+<script>
+const LS={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const DEFAULT_FAV=["Christian Wallis"];
+let favAuthors=new Set(LS.get("favAuthors",DEFAULT_FAV));
+let watched=new Set(LS.get("watched",[]));
+const st={q:"",author:new Set(),source:new Set(),region:new Set(),styles:new Set(),detail:new Set()};
+const V=window.VIDEOS;
+document.getElementById("updated").textContent=`共 ${V.length} 支 · 資料更新 ${window.UPDATED}`;
+
+function fmtDur(s){const h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;return (h?h+":"+String(m).padStart(2,"0"):m)+":"+String(x).padStart(2,"0")}
+function fmtNum(n){return n>=10000?(n/10000).toFixed(1)+"萬":n}
+function fmtDate(t){const d=new Date(t*1000);return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function match(v,skip){
+  if(st.q){const q=st.q.toLowerCase();const hay=(v.title+" "+v.summary+" "+v.authors.join(" ")+" "+v.series).toLowerCase();if(!hay.includes(q))return false}
+  if(skip!=="author"&&st.author.size&&!v.authors.some(a=>st.author.has(a)))return false;
+  if(skip!=="source"&&st.source.size&&!st.source.has(v.source))return false;
+  if(skip!=="region"&&st.region.size&&!st.region.has(v.region))return false;
+  if(skip!=="detail"&&st.detail.size&&!st.detail.has(v.detail))return false;
+  if(skip!=="styles")for(const s of st.styles)if(!v.styles.includes(s))return false;
+  if(document.getElementById("hideWatched").checked&&watched.has(v.bvid))return false;
+  if(document.getElementById("onlyFav").checked&&!v.authors.some(a=>favAuthors.has(a)))return false;
+  return true;
+}
+function counts(key){
+  const c=new Map();
+  for(const v of V){if(!match(v,key))continue;
+    const vals=key==="author"?v.authors:key==="styles"?v.styles:[v[key]];
+    for(const x of vals){if(x)c.set(x,(c.get(x)||0)+1)}}
+  return c;
+}
+function allValues(key){const s=new Map();for(const v of V){const vals=key==="author"?v.authors:key==="styles"?v.styles:[v[key]];for(const x of vals)if(x)s.set(x,(s.get(x)||0)+1)}return s}
+const TOTALS={author:allValues("author"),source:allValues("source"),region:allValues("region"),styles:allValues("styles"),detail:allValues("detail")};
+
+function renderChips(key){
+  const el=document.getElementById("f-"+key),c=counts(key);
+  let items=[...TOTALS[key].keys()];
+  if(key==="author"){const aq=document.getElementById("aq").value.toLowerCase();if(aq)items=items.filter(a=>a.toLowerCase().includes(aq))}
+  items.sort((a,b)=>{
+    if(key==="author"){const fa=favAuthors.has(a),fb=favAuthors.has(b);if(fa!==fb)return fa?-1:1}
+    return (TOTALS[key].get(b)-TOTALS[key].get(a))||a.localeCompare(b)});
+  if(key==="detail")items=items.filter(x=>TOTALS.detail.get(x)>=2||st.detail.has(x));
+  el.innerHTML=items.map(x=>{const n=c.get(x)||0,on=st[key].has(x);
+    if(!n&&!on&&key!=="author")return `<span class="chip" style="opacity:.35" data-k="${key}" data-v="${esc(x)}">${esc(x)}<span class="n">0</span></span>`;
+    if(!n&&!on)return "";
+    const fav=key==="author"&&favAuthors.has(x);
+    return `<span class="chip${on?" on":""}${fav?" favauthor":""}" data-k="${key}" data-v="${esc(x)}" title="${key==="author"?"點選篩選；右鍵或長按加入/移除★":""}">${fav?"★ ":""}${esc(x)}<span class="n">${n}</span></span>`}).join("");
+}
+function renderHero(){
+  const favs=[...favAuthors];
+  const n=V.filter(v=>v.authors.some(a=>favAuthors.has(a))).length;
+  const w=V.filter(v=>v.authors.some(a=>favAuthors.has(a))&&watched.has(v.bvid)).length;
+  document.getElementById("hero").innerHTML=`<div><b>★ 我的作者：${favs.map(esc).join("、")||"（尚未設定）"}</b><div style="opacity:.85;font-size:13px">${n} 支作品 · 已看 ${w} 支 · 在作者標籤上按右鍵（手機長按）可加入或移除★</div></div><div class="sp"></div><button class="btn" id="heroGo">只看★作者</button>`;
+  document.getElementById("heroGo").onclick=()=>{document.getElementById("onlyFav").checked=true;render()};
+}
+function render(){
+  ["author","source","region","styles","detail"].forEach(renderChips);
+  renderHero();
+  let list=V.filter(v=>match(v));
+  const s=document.getElementById("sort").value;
+  const f={new:(a,b)=>b.pubdate-a.pubdate,old:(a,b)=>a.pubdate-b.pubdate,view:(a,b)=>b.view-a.view,fav:(a,b)=>b.fav-a.fav,long:(a,b)=>b.duration-a.duration,short:(a,b)=>a.duration-b.duration}[s];
+  list.sort(f);
+  document.getElementById("count").textContent=`顯示 ${list.length} / ${V.length} 支`;
+  const g=document.getElementById("grid");
+  if(!list.length){g.innerHTML=`<div class="empty">沒有符合條件的影片，試著清除一些篩選。</div>`;return}
+  g.innerHTML=list.map(v=>{
+    const isFav=v.authors.some(a=>favAuthors.has(a)),url="https://www.bilibili.com/video/"+v.bvid;
+    return `<div class="card${isFav?" fav":""}${watched.has(v.bvid)?" watched":""}">
+      <a class="thumb" href="${url}" target="_blank" rel="noopener"><img loading="lazy" referrerpolicy="no-referrer" src="${v.pic.replace(/^http:/,"https:")}@480w_270h_1c.webp" alt=""><span class="dur">${fmtDur(v.duration)}</span>${v.series?`<span class="ser">${esc(v.series)}${v.part?" · "+esc(v.part):""}</span>`:""}</a>
+      <div class="body">
+        <a class="title" href="${url}" target="_blank" rel="noopener">${esc(v.title)}</a>
+        <div class="sum">${esc(v.summary)}</div>
+        <div class="meta">${v.authors.map(a=>`<span class="au${favAuthors.has(a)?" isfav":""}" data-au="${esc(a)}">${esc(a)}</span>`).join(" / ")}</div>
+        <div class="tags"><span class="tag src" data-k="source" data-v="${esc(v.source)}">${esc(v.source)}</span>${v.detail?`<span class="tag src" data-k="detail" data-v="${esc(v.detail)}">${esc(v.detail)}</span>`:""}<span class="tag src" data-k="region" data-v="${esc(v.region)}">${esc(v.region)}</span>${v.styles.map(x=>`<span class="tag" data-k="styles" data-v="${esc(x)}">${esc(x)}</span>`).join("")}</div>
+        <div class="foot"><span>${fmtDate(v.pubdate)} · ▶ ${fmtNum(v.view)} · ☆ ${fmtNum(v.fav)}</span><label><input type="checkbox" data-w="${v.bvid}" ${watched.has(v.bvid)?"checked":""}> 已看</label></div>
+      </div></div>`}).join("");
+}
+function toggle(k,v){st[k].has(v)?st[k].delete(v):st[k].add(v);render()}
+function toggleFav(a){favAuthors.has(a)?favAuthors.delete(a):favAuthors.add(a);LS.set("favAuthors",[...favAuthors]);render()}
+document.addEventListener("click",e=>{
+  const c=e.target.closest("[data-k]");if(c){toggle(c.dataset.k,c.dataset.v);return}
+  const au=e.target.closest("[data-au]");if(au){st.author.clear();st.author.add(au.dataset.au);render();window.scrollTo({top:0,behavior:"smooth"});return}
+  const cl=e.target.closest("[data-clear]");if(cl){st[cl.dataset.clear].clear();render()}
+});
+document.addEventListener("contextmenu",e=>{
+  const c=e.target.closest('[data-k="author"]')||e.target.closest("[data-au]");
+  if(c){e.preventDefault();toggleFav(c.dataset.v||c.dataset.au)}
+});
+let lp;document.addEventListener("touchstart",e=>{const c=e.target.closest('[data-k="author"]')||e.target.closest("[data-au]");if(c)lp=setTimeout(()=>{toggleFav(c.dataset.v||c.dataset.au);lp=null},600)},{passive:true});
+document.addEventListener("touchend",()=>clearTimeout(lp));
+document.addEventListener("change",e=>{if(e.target.dataset.w){const b=e.target.dataset.w;e.target.checked?watched.add(b):watched.delete(b);LS.set("watched",[...watched]);render()}});
+document.getElementById("q").oninput=e=>{st.q=e.target.value.trim();render()};
+document.getElementById("aq").oninput=()=>renderChips("author");
+["sort","hideWatched","onlyFav"].forEach(id=>document.getElementById(id).onchange=render);
+document.getElementById("reset").onclick=()=>{for(const k of ["author","source","region","styles","detail"])st[k].clear();st.q="";document.getElementById("q").value="";document.getElementById("onlyFav").checked=false;document.getElementById("hideWatched").checked=false;render()};
+document.getElementById("toggleSide").onclick=()=>document.getElementById("side").classList.toggle("open");
+const savedTheme=LS.get("theme",null);if(savedTheme)document.documentElement.dataset.theme=savedTheme;
+document.getElementById("theme").onclick=()=>{const cur=document.documentElement.dataset.theme||(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark");const n=cur==="light"?"dark":"light";document.documentElement.dataset.theme=n;LS.set("theme",n)};
+render();
+</script>
+</body>
+</html>
